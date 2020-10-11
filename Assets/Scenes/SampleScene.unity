@@ -366,5 +366,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Quad_Cube_TopFaceatOrigin
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4170057507834705099, guid: 69f536c8355f8074f8255d9d32b16d6f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 69f536c8355f8074f8255d9d32b16d6f, type: 3}
