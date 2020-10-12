@@ -31,15 +31,17 @@ public class CubeEditor : MonoBehaviour
         gridSizeFactor.x = Mathf.RoundToInt(transform.position.x / gridSize);
         gridSizeFactor.y = Mathf.RoundToInt(transform.position.y / gridSize);
         gridSizeFactor.z = Mathf.RoundToInt(transform.position.z / gridSize);
+        string labelText = gridSizeFactor.x + "," + gridSizeFactor.z;
 
         snapPos.x = gridSizeFactor.x * gridSize; 
         snapPos.y = gridSizeFactor.y * gridSize;
         snapPos.z = gridSizeFactor.z * gridSize;
-
         transform.position = new Vector3(snapPos.x, snapPos.y, snapPos.z);
 
         textMesh = GetComponentInChildren<TextMesh>();
-        textMesh.text = gridSizeFactor.x + "," + gridSizeFactor.z;
+        textMesh.text = labelText;
+        
+        gameObject.name = labelText;
     }
 }
 

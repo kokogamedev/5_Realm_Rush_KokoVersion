@@ -81,7 +81,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 81907930}
-  m_Text: xx,xx
+  m_Text: 0,0
   m_OffsetZ: 0
   m_CharacterSize: 0.02
   m_LineSpacing: 1
@@ -89,7 +89,7 @@ TextMesh:
   m_Alignment: 0
   m_TabSize: 4
   m_FontSize: 179
-  m_FontStyle: 0
+  m_FontStyle: 1
   m_RichText: 1
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Color:
@@ -490,7 +490,7 @@ GameObject:
   - component: {fileID: 5003386113549444341}
   - component: {fileID: 798690015489476615}
   - component: {fileID: 4170057507834705100}
-  - component: {fileID: 4170057507834705099}
+  - component: {fileID: -762470083279323532}
   m_Layer: 0
   m_Name: Quad_Cube_TopFaceatOrigin
   m_TagString: Untagged
@@ -507,7 +507,7 @@ Transform:
   m_GameObject: {fileID: 5048184294815080345}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 9, y: 10, z: 9}
   m_Children:
   - {fileID: 692273182015778544}
   - {fileID: 7578783298935612555}
@@ -572,28 +572,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!102 &4170057507834705099
-TextMesh:
-  serializedVersion: 3
+--- !u!114 &-762470083279323532
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5048184294815080345}
-  m_Text: 
-  m_OffsetZ: 0
-  m_CharacterSize: 1
-  m_LineSpacing: 1
-  m_Anchor: 0
-  m_Alignment: 0
-  m_TabSize: 4
-  m_FontSize: 0
-  m_FontStyle: 1
-  m_RichText: 1
-  m_Font: {fileID: 0}
-  m_Color:
-    serializedVersion: 2
-    rgba: 4294967295
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 781a804d319fae44fab227a21474187e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5929805928717218364
 GameObject:
   m_ObjectHideFlags: 0
