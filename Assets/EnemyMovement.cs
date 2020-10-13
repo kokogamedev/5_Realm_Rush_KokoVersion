@@ -6,18 +6,24 @@ public class EnemyMovement : MonoBehaviour
 {
 
     [SerializeField] List<Waypoint> path;
+    [SerializeField] float dwellTime = 1f;
     // Start is called before the first frame update
     void Start()
     {
-        PrintAllWaypoints();
+        StartCoroutine(FollowPath());
+        print("Hey I'm back at Start");
     }
 
-    private void PrintAllWaypoints()
+    IEnumerator FollowPath()
     {
+        print("Starting patrol");
         foreach (Waypoint waypoint in path)
         {
-            print(waypoint.name);
+            print("Visiting block: " + waypoint.name);
+            transform.position = waypoint.transform.position;
+            yield return new WaitForSeconds(dwellTime);
         }
+        print("Ending patrol");
     }
 
     // Update is called once per frame
