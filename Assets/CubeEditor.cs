@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteInEditMode]
+[SelectionBase]
 public class CubeEditor : MonoBehaviour
 {
     [Header("Grid Parameters")]
