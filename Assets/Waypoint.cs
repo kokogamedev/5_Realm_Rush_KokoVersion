@@ -21,7 +21,7 @@ public class Waypoint : MonoBehaviour
         return gridSize;
     }
 
-    public Vector3 GetGridPos()
+    public Vector2 GetGridPos()
     {
         Vector3 gridCoord3D;  //This variable is personal choice -> I made it to contain the actual normalized grid value according to the transform of the object
                               //and the gridSize we select
@@ -33,7 +33,7 @@ public class Waypoint : MonoBehaviour
         return new Vector2(gridCoord3D.x, gridCoord3D.z);
     }
 
-    public Vector3 GetGridWorldPos()
+    public Vector2 GetGridWorldPos()
     {
         Vector3 gridPos3D; //This vector represents the snapped position of the object
         Vector2 gridCoord = GetGridPos();  //This variable is personal choice -> I made it to contain the actual normalized grid value according to the transform of the object
