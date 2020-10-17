@@ -492,7 +492,7 @@ GameObject:
   - component: {fileID: 4170057507834705100}
   - component: {fileID: -762470083279323532}
   m_Layer: 0
-  m_Name: Quad_Cube_TopFaceatOrigin
+  m_Name: 0,0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -530,7 +530,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d1286a351783a048bac65f1ed522c13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridSize: 10
 --- !u!23 &4170057507834705100
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -645,7 +644,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c4792664e63c5284b8e34bc2d408042c, type: 2}
+  - {fileID: 2100000, guid: 7a00601e66c603149a7009bdd7c630b1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
