@@ -124,18 +124,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &135445182 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: -762470083279323532, guid: 69f536c8355f8074f8255d9d32b16d6f,
-    type: 3}
-  m_PrefabInstance: {fileID: 1471919832}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 781a804d319fae44fab227a21474187e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &136254731
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1428,6 +1416,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 703383598}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1596227076 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -762470083279323532, guid: 69f536c8355f8074f8255d9d32b16d6f,
+    type: 3}
+  m_PrefabInstance: {fileID: 4170057507834705096}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 781a804d319fae44fab227a21474187e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1739485999
 GameObject:
   m_ObjectHideFlags: 0
@@ -1489,7 +1489,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a65aa6864ddfb4180172b01b3fa3dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startWaypoint: {fileID: 135445182}
+  startWaypoint: {fileID: 1596227076}
   endWaypoint: {fileID: 1400501290}
 --- !u!1001 &1789737939
 PrefabInstance:
