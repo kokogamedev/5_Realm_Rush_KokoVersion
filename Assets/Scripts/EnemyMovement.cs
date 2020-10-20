@@ -6,6 +6,7 @@ public class EnemyMovement : MonoBehaviour
 {
 
     [SerializeField] float dwellTime = 1f;
+    Transform enemyTransform;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +32,11 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        enemyTransform = gameObject.transform;
+    }
+
+    public Transform GetEnemyTransform()
+    {
+        return enemyTransform;
     }
 }
