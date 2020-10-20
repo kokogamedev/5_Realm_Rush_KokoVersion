@@ -1,10 +1,16 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Waypoint : MonoBehaviour
 {
     const int gridSize = 10;
+    public bool isExplored = false;
+    public bool isStartorEnd = false;
+    public Waypoint exploredFrom;
+    public Color exploredColor;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,8 +20,17 @@ public class Waypoint : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        ColorMeExplored();
     }
+
+    private void ColorMeExplored()
+    {
+        if (isExplored && !isStartorEnd)
+        {
+            SetTopColor(exploredColor);
+        }
+    }
+
     public int GetGridSize()
     {
         return gridSize;

@@ -15,6 +15,7 @@ public class Pathfinder : MonoBehaviour
 
     Queue<Waypoint> queue = new Queue<Waypoint>();
     bool isRunning = true;
+    Waypoint searchCenter; //current search center
 
     // Start is called before the first frame update
     void Start()
@@ -30,31 +31,37 @@ public class Pathfinder : MonoBehaviour
         // en-queue the start waypoint
         queue.Enqueue(startWaypoint);
 
-        while (queue.Count > 0) // while the queue has items
+        while (queue.Count > 0 && isRunning) // while the queue has items
         {
-            var searchCenter = queue.Dequeue(); //de-queue the frontier waypoint
-            HaltIfEndisSearchCenter(searchCenter); //if search center is the end waypoint, stop algorithm
+            searchCenter = queue.Dequeue(); //de-queue the frontier waypoint
+            searchCenter.isExplored = true; // mark frontier as explored
+            print("Searching from" + searchCenter.name);
+            HaltIfEndisSearchCenter(); //if search center is the end waypoint, stop algorithm
+            ExploreNeighbors();//for each direction from frontier, queue new unexplored waypoint 
         }
+        //todo: work out path
+        print("Finished Pathfinding?");
     }
 
-    private void HaltIfEndisSearchCenter(Waypoint searchCenter)
+    private void HaltIfEndisSearchCenter()
     {
         if (searchCenter == endWaypoint)
         {
-            print("Searching from end node, therefore stopping");
+            //print("Searching from end node, therefore stopping");
             isRunning = false;
         }
     }
 
     private void ExploreNeighbors()
     {
+        if (!isRunning) { return; }
         foreach (Vector2 direction in directions)
         {
-            Vector2 explorationCoordinates = startWaypoint.GetGridPos() + direction;
+            Vector2 neighborCoordinates = searchCenter.GetGridPos() + direction;
             //print("Exploring " + explorationCoordinates);
             try
             {
-                grid[explorationCoordinates].SetTopColor(Color.white);
+                QueueNewNeighbors(neighborCoordinates);
             }
             catch
             {
@@ -63,11 +70,22 @@ public class Pathfinder : MonoBehaviour
         }
     }
 
+    private void QueueNewNeighbors(Vector2 neighborCoordinates)
+    {
+        Waypoint neighbor = grid[neighborCoordinates];
+
+        if (neighbor.isExplored == false && queue.Contains(neighbor) == false)
+        {
+            queue.Enqueue(neighbor);
+            //print("Queueing" + neighbor);
+            neighbor.exploredFrom = searchCenter;
+        }
+    }
+
     private void LoadBlocks()
     {
         var waypoints = FindObjectsOfType<Waypoint>();
-        Color color;
-        
+
         foreach(Waypoint waypoint in waypoints)
         {
             var gridPos = waypoint.GetGridPos();
@@ -80,7 +98,7 @@ public class Pathfinder : MonoBehaviour
             {
                 grid.Add(gridPos, waypoint);
             }
-            print("Loaded " + grid.Count + " blocks");
+            //print("Loaded " + grid.Count + " blocks");
         }
     }
 
@@ -88,6 +106,9 @@ public class Pathfinder : MonoBehaviour
     {
         startWaypoint.SetTopColor(Color.green);
         endWaypoint.SetTopColor(Color.red);
+
+        startWaypoint.isStartorEnd = true;
+        endWaypoint.isStartorEnd = true;
     }
 
     // Update is called once per frame
