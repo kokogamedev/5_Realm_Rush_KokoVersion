@@ -39,7 +39,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 81907930}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -81,7 +81,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 81907930}
-  m_Text: 1,1
+  m_Text: 0,0
   m_OffsetZ: 0
   m_CharacterSize: 0.07
   m_LineSpacing: 1
@@ -199,6 +199,7 @@ MonoBehaviour:
   isStartorEnd: 0
   exploredFrom: {fileID: 0}
   exploredColor: {r: 1, g: 1, b: 1, a: 0}
+  isNeutral: 0
 --- !u!1 &5929805928717218364
 GameObject:
   m_ObjectHideFlags: 0
