@@ -15,6 +15,7 @@ public class Tower : MonoBehaviour
     [SerializeField] AudioClip firingSFX; //Initialize the bullet firing SFX 
 
     bool isWeaponActive = false; //Initialize the boolean that indicates whether or not your weapon game object is active (whether your bullets should be firing)
+    float firingRange = 50f; //Initialize a variable for tower's firing range - the furthest the target before tower cannot fire
 
     // Start is called before the first frame update
     void Start()
@@ -28,35 +29,46 @@ public class Tower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PanTowardEnemy(); //orient your pivoting child game objects (the head of your tower and the bullet-firing particle system) to face the target location
-        FireAtEnemy(); // set your bullet-firing particle system to be active (fire your bullets) at the target when it is present in the scene 
+        float rangeToTarget = Vector3.Distance(targetToOrientTowards.position, transform.position);
+        print(rangeToTarget);
+        PanAndFireIfInRange();
+        
+    }
+
+    private void PanAndFireIfInRange() //Pans and fires at enemy if target is withing range established by firingRange
+    {
+        //idea: make tower miss slightly sometimes according to an accuracy chance variable?
+        //idea: make tower delay slightly when orienting - movement-time requirements?
+        float rangeToTarget = Vector3.Distance(targetToOrientTowards.position, transform.position); //this variable represents the current range of your tower to the target
+        if (rangeToTarget <= firingRange && enemyMovement != null) //tests if your current range to Target within tower's firing range AND  whether an enemy (more specifically the EnemyMovement script attached to it) is present in the scene
+        {
+            PanTowardEnemy(); //orient your pivoting child game objects (the head of your tower and the bullet-firing particle system) to face the target location
+            FiringStatusActive();
+        }
+        else
+        {
+            FiringStatusInactive();
+        }
+
+    }
+
+    private void FiringStatusInactive()
+    {
+        isWeaponActive = false;
+        weapon.SetActive(isWeaponActive); // set your bullet-firing particle system to be inactive (fire your bullets) at the target if isWeaponActive is false
+    }
+
+    private void FiringStatusActive()
+    {
+        PlayFiringSFXWhenEmitting(); //// this method sets your bullet-firing particle system to be active (fire your bullets) when a particle is emitting
+        isWeaponActive = true; //sets the status of your weapon-active status to true
+        weapon.SetActive(isWeaponActive); // set your bullet-firing particle system to be active (fire your bullets) at the target if isWeaponActive is true
     }
 
     private void PanTowardEnemy() //this method is responsible for pivoting child game objects (the head of your tower and the bullet-firing particle system) to face the target location
     {
         objectToPan = transform.Find("Pivot"); //this is the game object parent of all your pivoting game objects
-        if (enemyMovement != null) //this tests whether an enemy (more specifically the EnemyMovement script attached to it) is present in the scene
-        {
-            objectToPan.LookAt(targetToOrientTowards.position); //rotates your game object to the Vector3 position of your target
-        }
-    }
-
-    private void FireAtEnemy()
-        //todo: make tower only fire when enemy is within a certain range
-        //idea: make tower miss slightly sometimes according to an accuracy chance variable?
-        //idea: make tower delay slightly when orienting - movement-time requirements?
-    {
-        if (enemyMovement != null) //this tests whether an enemy (more specifically the EnemyMovement script attached to it) is present in the scene
-        {
-            isWeaponActive = true; //sets the status of your weapon-active status to true
-            PlayFiringSFXWhenEmitting(); //// this method sets your bullet-firing particle system to be active (fire your bullets) at the target when it is present in the scene AND when a particle is emitting
-
-        }
-        else
-        {
-            isWeaponActive = false; //sets the status of your weapon-active status to false
-        }
-        weapon.SetActive(isWeaponActive);
+        objectToPan.LookAt(targetToOrientTowards.position); //rotates your game object to the Vector3 position of your target
     }
 
     private void PlayFiringSFXWhenEmitting() // this method sets your bullet-firing particle system to be active (fire your bullets) at the target when it is present in the scene 
