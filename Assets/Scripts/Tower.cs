@@ -41,7 +41,10 @@ public class Tower : MonoBehaviour
         }
     }
 
-    private void FireAtEnemy() //
+    private void FireAtEnemy()
+        //todo: make tower only fire when enemy is within a certain range
+        //idea: make tower miss slightly sometimes according to an accuracy chance variable?
+        //idea: make tower delay slightly when orienting - movement-time requirements?
     {
         if (enemyMovement != null) //this tests whether an enemy (more specifically the EnemyMovement script attached to it) is present in the scene
         {
