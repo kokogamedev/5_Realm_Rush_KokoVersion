@@ -4410,10 +4410,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 591658811}
-  - component: {fileID: 591658810}
-  - component: {fileID: 591658812}
   - component: {fileID: 591658813}
+  - component: {fileID: 591658810}
   - component: {fileID: 591658814}
+  - component: {fileID: 591658812}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -4433,7 +4433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b30584e3e42918e48bb43c050482fbeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dwellTime: 1
+  dwellTime: 1.15
 --- !u!4 &591658811
 Transform:
   m_ObjectHideFlags: 0
@@ -4449,19 +4449,22 @@ Transform:
   m_Father: {fileID: 1735727887}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &591658812
-BoxCollider:
+--- !u!54 &591658812
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 591658809}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5.75, y: 5.75, z: 5.75}
-  m_Center: {x: 0, y: 7.23, z: 0}
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!82 &591658813
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4573,7 +4576,7 @@ MonoBehaviour:
   impactSound: {fileID: 8300000, guid: 2cd67410970b48f4480deef53d2e8fa3, type: 3}
   deathSound: {fileID: 8300000, guid: a0383d8a701cca242a15b93b24f5ab2e, type: 3}
   deathFX: {fileID: 6954600313577017317, guid: 37eb42d7a3fa3cf41b1e79109dd3ebfc, type: 3}
-  hits: 5
+  hits: 15
 --- !u!1001 &606065743
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6721,22 +6724,19 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 197317423}
   m_PrefabAsset: {fileID: 0}
---- !u!54 &936725621
-Rigidbody:
+--- !u!65 &936725622
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 936725618}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Size: {x: 15, y: 14, z: 13}
+  m_Center: {x: 0, y: 7.000002, z: 0}
 --- !u!4 &940815092 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8500276608876466811, guid: 8160ecd45f79bc547be4fd746bddf47c,
@@ -6984,8 +6984,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.19294806, y: -0.79769653, z: 0.46568546, w: 0.33104149}
-  m_LocalPosition: {x: 61.636005, y: 121.14585, z: 48.957836}
+  m_LocalRotation: {x: 0.16139309, y: -0.830835, z: 0.4329518, w: 0.3101907}
+  m_LocalPosition: {x: 59.0402, y: 101.71654, z: 69.53844}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
