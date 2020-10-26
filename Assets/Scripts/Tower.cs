@@ -10,7 +10,6 @@ public class Tower : MonoBehaviour
     [SerializeField] GameObject weapon; //Initialize the weapon game object that contains the particle system for firing bullets, impacting your target, etc (this is essentially your bullet firing particle system)
     ParticleSystem weaponParticleEffect; //Initialize the component particle system of your weapon game object (this is the bullet firing particle system)
     AudioSource weaponAudioSource; //Initialize the audiosource component of your weapon game object
-    EnemyMovement enemyMovement; //Initialize the EnemyMovement script variable, so you can extract variables/methods from it
 
     [SerializeField] AudioClip firingSFX; //Initialize the bullet firing SFX 
 
@@ -20,7 +19,6 @@ public class Tower : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        enemyMovement = FindObjectOfType<EnemyMovement>(); //At start, find an object in our scene of type EnemyMovement (find the EnemyMovement script attached to your game object... 
         // todo: this might need some refinemnent when multiple enemies show up... could cause a problme of finding multiple objects of this type
         weaponParticleEffect = weapon.GetComponent<ParticleSystem>(); //At start, extract weapon game object's particle system component and set it to equal our initialized weaponParticleEffect variable
         weaponAudioSource = weapon.GetComponent<AudioSource>(); //At start, extract weapon game object's audiosource component and set it to equal our initialized weaponAudioSource variable
@@ -29,18 +27,19 @@ public class Tower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float rangeToTarget = Vector3.Distance(targetToOrientTowards.position, transform.position);
-        print(rangeToTarget);
         PanAndFireIfInRange();
-        
     }
 
     private void PanAndFireIfInRange() //Pans and fires at enemy if target is withing range established by firingRange
     {
         //idea: make tower miss slightly sometimes according to an accuracy chance variable?
         //idea: make tower delay slightly when orienting - movement-time requirements?
+        EnemyMovement targetObject = FindObjectOfType<EnemyMovement>();
+        if (targetObject == null) { FiringStatusInactive(); return; }
+
+        targetToOrientTowards = targetObject.transform.Find("Enemy_A");
         float rangeToTarget = Vector3.Distance(targetToOrientTowards.position, transform.position); //this variable represents the current range of your tower to the target
-        if (rangeToTarget <= firingRange && enemyMovement != null) //tests if your current range to Target within tower's firing range AND  whether an enemy (more specifically the EnemyMovement script attached to it) is present in the scene
+        if (rangeToTarget <= firingRange) //tests if your current range to Target within tower's firing range AND  whether an enemy (more specifically the EnemyMovement script attached to it) is present in the scene
         {
             PanTowardEnemy(); //orient your pivoting child game objects (the head of your tower and the bullet-firing particle system) to face the target location
             FiringStatusActive();
@@ -48,6 +47,7 @@ public class Tower : MonoBehaviour
         else
         {
             FiringStatusInactive();
+            print("Target out of range");
         }
 
     }
