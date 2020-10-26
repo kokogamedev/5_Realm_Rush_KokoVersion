@@ -7,7 +7,6 @@ public class Waypoint : MonoBehaviour
 {
     const int gridSize = 10;
     public bool isExplored = false;
-    public bool isStartorEnd = false;
     public Waypoint exploredFrom;
     public Color exploredColor;
     public bool isNeutral = false;
@@ -20,7 +19,7 @@ public class Waypoint : MonoBehaviour
 
     private void IsItNeutral()
     {
-        if (gameObject.tag == "Neutral")
+        if (gameObject.CompareTag("Neutral")) //new code used here --> more efficient than just comparing using ==
         {
             isNeutral = true;
         }
@@ -29,15 +28,11 @@ public class Waypoint : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ColorMeExplored();
     }
 
-    private void ColorMeExplored()
+    private void OnMouseOver()
     {
-        if (isExplored && !isStartorEnd)
-        {
-            SetTopColor(exploredColor);
-        }
+        Debug.Log("Mouse is over block" + gameObject.name);
     }
 
     public int GetGridSize()
@@ -69,13 +64,6 @@ public class Waypoint : MonoBehaviour
         return new Vector2(gridPos3D.x, gridPos3D.z);
 
     }
-
-    public void SetTopColor(Color color)
-    {
-        MeshRenderer topMeshRenderer = transform.Find("Quad_top").GetComponent<MeshRenderer>();
-        topMeshRenderer.material.color = color;
-    }
-
 }
 
 

@@ -38,7 +38,6 @@ public class Pathfinder : MonoBehaviour
     private void CalculatePath()
     {
         LoadBlocks();
-        ColorStartAndEnd();
         BreadthFirstSearch();
         CreatePath();
     }
@@ -76,7 +75,7 @@ public class Pathfinder : MonoBehaviour
         {
             searchCenter = queue.Dequeue(); //de-queue the frontier waypoint
             searchCenter.isExplored = true; // mark frontier as explored
-            print("Searching from" + searchCenter.name);
+            //print("Searching from" + searchCenter.name);
             HaltIfEndisSearchCenter(); //if search center is the end waypoint, stop algorithm
             ExploreNeighbors();//for each direction from frontier, queue new unexplored waypoint 
         }
@@ -135,15 +134,6 @@ public class Pathfinder : MonoBehaviour
             }
             //print("Loaded " + grid.Count + " blocks");
         }
-    }
-
-    private void ColorStartAndEnd()
-    {
-        startWaypoint.SetTopColor(Color.green);
-        endWaypoint.SetTopColor(Color.red);
-
-        startWaypoint.isStartorEnd = true;
-        endWaypoint.isStartorEnd = true;
     }
 
     // Update is called once per frame

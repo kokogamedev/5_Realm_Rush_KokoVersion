@@ -80,7 +80,7 @@ public class Tower : MonoBehaviour
         else
         {
             FiringStatusInactive();
-            print("Target out of range");
+            //print("Target out of range");
         }
 
     }

@@ -16,21 +16,21 @@ public class EnemyMovement : MonoBehaviour
         
         List<Waypoint> path = pathfinder.GetPath();
         StartCoroutine(FollowPath(path));
-        print("Hey I'm back at Start");
+        //print("Hey I'm back at Start");
     }
 
     IEnumerator FollowPath(List<Waypoint> path)
     {
-        print("Starting patrol");
+        //print("Starting patrol");
         
         foreach (Waypoint waypoint in path)
         {
-            print("Visiting block: " + waypoint.name);
+            //print("Visiting block: " + waypoint.name);
             transform.position = waypoint.transform.position;
             enemyTransform = waypoint.transform;
             yield return new WaitForSeconds(dwellTime);
         }
-        print("Ending patrol");
+        //print("Ending patrol");
     }
 
     public Transform GetEnemyTransform()
