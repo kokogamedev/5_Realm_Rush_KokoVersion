@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class SpawnEnemies : MonoBehaviour
 {
-    [SerializeField] float secondsBetweenSpawns = 5f;
+    [SerializeField][Range(0.1f,120f)] float secondsBetweenSpawns = 5f;
     [SerializeField] int enemyNumberLimit = 5;
-    [SerializeField] EnemyMovement EnemyInstance;
+    [SerializeField] EnemyMovement enemyInstance;
     public List<EnemyMovement> enemies = new List<EnemyMovement>();
 
     // Start is called before the first frame update
@@ -20,8 +20,7 @@ public class SpawnEnemies : MonoBehaviour
     {
         while(enemies.Count <= enemyNumberLimit)
         {
-            EnemyMovement newEnemy = Instantiate(EnemyInstance, transform.parent);
-            enemies.Add(newEnemy);
+            EnemyMovement newEnemy = Instantiate(enemyInstance, transform.position, Quaternion.identity);
             newEnemy.transform.parent = gameObject.transform;
             yield return new WaitForSeconds(secondsBetweenSpawns);
         }

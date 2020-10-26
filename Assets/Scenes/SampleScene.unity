@@ -13894,7 +13894,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   secondsBetweenSpawns: 5
   enemyNumberLimit: 5
-  EnemyInstance: {fileID: 1528981435985102729, guid: 4829402930f722f479e28a0eec0d3a9f,
+  enemyInstance: {fileID: 1528981435985102729, guid: 4829402930f722f479e28a0eec0d3a9f,
     type: 3}
   enemies: []
 --- !u!1 &1739485999
