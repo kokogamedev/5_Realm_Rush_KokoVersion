@@ -8,8 +8,8 @@ public class EnemyDamage : MonoBehaviour
 
     [SerializeField] AudioClip impactSound; //initializing the audioclip for weapon impacts on enemy
     [SerializeField] AudioClip deathSound; //initializing the audioclip for death/explosion sounds for enemy
-    [SerializeField] ParticleSystem deathFX; //initializing the particle system for enemy death (explosion)
-
+    //[SerializeField] ParticleSystem deathFX; //initializing the particle system for enemy death (explosion) --- part of an attempted way to instantiate and play this particle system (see associated todo in KillEnemy()
+    [SerializeField] GameObject deathFX;
 
     //todo: create a dynamic change of hits and scoreperhit as game goes on, also potentially find a way to adjust enemy appearance as its hitpoints increase
     [SerializeField] int hits = 5; //initializing number of hits required for enemy death
@@ -53,13 +53,20 @@ public class EnemyDamage : MonoBehaviour
 
     private void KillEnemy() //instantiates a self-destroying explosion particle system at location of game object (and no rotation), and destroys your game object
     {
-        GameObject fx = Instantiate(deathFX.gameObject, transform.position, Quaternion.identity);
-        if (deathFX.isPlaying == false && deathFX.isEmitting == false)
-        {
-            deathFX.Play();
-        }
-        
+
+        GameObject fx = Instantiate(deathFX, transform.position, Quaternion.identity);
         //fx.transform.parent = parent;
+
+        //Following code was attempting another method used by Rick (pre-video-check... this was my attempt), but for some reason this is not working... 
+        // The idea is to disable PlayOnAwake in the particle system prefab, [SerializeField] the particle system of deathFX rather than the game object, and then command that it play after instantiating the deathFX.gameObject
+        // The fault is in deathFX.Play()... or at least in how I am using it with some Unity editor particle system setting... no solution at this time.
+        // todo: find a solution to why this did not work
+        //GameObject fx = Instantiate(deathFX.gameObject, transform.position, Quaternion.identity);
+        //if (deathFX.isPlaying == false && deathFX.isEmitting == false)
+        //{
+        //    deathFX.Play();
+        //}
+
         Destroy(gameObject);
     }
 

@@ -159,7 +159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impactSound: {fileID: 8300000, guid: 2cd67410970b48f4480deef53d2e8fa3, type: 3}
   deathSound: {fileID: 8300000, guid: a0383d8a701cca242a15b93b24f5ab2e, type: 3}
-  deathFX: {fileID: 7079472059457687109, guid: 37eb42d7a3fa3cf41b1e79109dd3ebfc, type: 3}
+  deathFX: {fileID: 6954600313577017317, guid: 37eb42d7a3fa3cf41b1e79109dd3ebfc, type: 3}
   hits: 12
 --- !u!54 &3353017384208296314
 Rigidbody:
