@@ -520,15 +520,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4000011428506136, guid: ecdd96beb7f93494880c052dfccf9dc1, type: 3}
       propertyPath: m_LocalScale.x
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4000011428506136, guid: ecdd96beb7f93494880c052dfccf9dc1, type: 3}
       propertyPath: m_LocalScale.y
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4000011428506136, guid: ecdd96beb7f93494880c052dfccf9dc1, type: 3}
       propertyPath: m_LocalScale.z
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 198000010217891986, guid: ecdd96beb7f93494880c052dfccf9dc1,
         type: 3}
@@ -675,15 +675,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4000011693693590, guid: 9f933fe8da3817c4ba4eb892b56a6c0f, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4000011693693590, guid: 9f933fe8da3817c4ba4eb892b56a6c0f, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4000011693693590, guid: 9f933fe8da3817c4ba4eb892b56a6c0f, type: 3}
       propertyPath: m_LocalScale.z
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 198000010585806678, guid: 9f933fe8da3817c4ba4eb892b56a6c0f,
         type: 3}
@@ -1225,7 +1225,7 @@ PrefabInstance:
     - target: {fileID: 511141623980310980, guid: 53876b77a2c819348b11768227d03747,
         type: 3}
       propertyPath: TrailModule.widthOverTrail.scalar
-      value: 8.5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 511141623980310980, guid: 53876b77a2c819348b11768227d03747,
         type: 3}
@@ -1366,6 +1366,11 @@ PrefabInstance:
         type: 3}
       propertyPath: LightsModule.ratio
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 511141623980310980, guid: 53876b77a2c819348b11768227d03747,
+        type: 3}
+      propertyPath: CollisionModule.minKillSpeed
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 511141623980310982, guid: 53876b77a2c819348b11768227d03747,
         type: 3}
