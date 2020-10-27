@@ -10,6 +10,8 @@ public class EnemyDamage : MonoBehaviour
     [SerializeField] AudioClip deathSound; //initializing the audioclip for death/explosion sounds for enemy
     [SerializeField] GameObject deathFX; //initializing the particle system for enemy death (explosion)
 
+
+    //todo: create a dynamic change of hits and scoreperhit as game goes on, also potentially find a way to adjust enemy appearance as its hitpoints increase
     [SerializeField] int hits = 5; //initializing number of hits required for enemy death
     int scorePerHit = 10; //initializing the points/score you receive for every weapon impact on enemy
     ScoreBoard scoreBoard; //initializing the Scoreboard script located on the scoreboard - allows us to update/extract from said script
@@ -45,7 +47,8 @@ public class EnemyDamage : MonoBehaviour
         hits--; 
         scoreBoard.ScoreHit(scorePerHit);
 
-        //todo: consider hit effects
+        //todo: consider hit effects --- I used subemitters, but Rick used a nested ParticleSystem called hitParticlePrefab, which he added through [SerializeField] member variable, and then utilized the following line
+        //hitParticlePrefab.Play();
     }
 
     private void KillEnemy() //instantiates a self-destroying explosion particle system at location of game object (and no rotation), and destroys your game object
