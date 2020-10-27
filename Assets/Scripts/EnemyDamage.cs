@@ -8,7 +8,7 @@ public class EnemyDamage : MonoBehaviour
 
     [SerializeField] AudioClip impactSound; //initializing the audioclip for weapon impacts on enemy
     [SerializeField] AudioClip deathSound; //initializing the audioclip for death/explosion sounds for enemy
-    [SerializeField] GameObject deathFX; //initializing the particle system for enemy death (explosion)
+    [SerializeField] ParticleSystem deathFX; //initializing the particle system for enemy death (explosion)
 
 
     //todo: create a dynamic change of hits and scoreperhit as game goes on, also potentially find a way to adjust enemy appearance as its hitpoints increase
@@ -53,7 +53,12 @@ public class EnemyDamage : MonoBehaviour
 
     private void KillEnemy() //instantiates a self-destroying explosion particle system at location of game object (and no rotation), and destroys your game object
     {
-        GameObject fx = Instantiate(deathFX, transform.position, Quaternion.identity);
+        GameObject fx = Instantiate(deathFX.gameObject, transform.position, Quaternion.identity);
+        if (deathFX.isPlaying == false && deathFX.isEmitting == false)
+        {
+            deathFX.Play();
+        }
+        
         //fx.transform.parent = parent;
         Destroy(gameObject);
     }
