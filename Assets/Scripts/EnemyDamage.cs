@@ -57,6 +57,8 @@ public class EnemyDamage : MonoBehaviour
         GameObject fx = Instantiate(deathFX, transform.position, Quaternion.identity);
         //fx.transform.parent = parent;
 
+        // Important to destroy particle effect after instantiation -- set Stop Action to Destroy in Particle system settings in Unity inspector!
+
         //Following code was attempting another method used by Rick (pre-video-check... this was my attempt), but for some reason this is not working... 
         // The idea is to disable PlayOnAwake in the particle system prefab, [SerializeField] the particle system of deathFX rather than the game object, and then command that it play after instantiating the deathFX.gameObject
         // The fault is in deathFX.Play()... or at least in how I am using it with some Unity editor particle system setting... no solution at this time.
