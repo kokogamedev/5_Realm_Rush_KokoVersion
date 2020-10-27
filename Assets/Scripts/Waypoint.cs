@@ -12,12 +12,8 @@ public class Waypoint : MonoBehaviour
     public bool isExplored = false;
     public bool isPlaceable = true;
 
-    [SerializeField] Tower tower;
-    [SerializeField] Transform towerParent;
-
     const int gridSize = 10;
     public bool isNeutral = false;
-
 
 
     // Start is called before the first frame update
@@ -46,10 +42,8 @@ public class Waypoint : MonoBehaviour
         {
             if (isPlaceable)
             {
-                Debug.Log("Place tower at " + gameObject.name);
-                GameObject towerInstance = Instantiate(tower.gameObject, transform.position, Quaternion.identity);
-                towerInstance.transform.parent = towerParent;
-                isPlaceable = false;
+                var towerFactory = FindObjectOfType<TowerFactory>();
+                towerFactory.AddTower(this); // this is a way of referencing current script/class in C#
             }
             else
             {
