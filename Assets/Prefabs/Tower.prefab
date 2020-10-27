@@ -1225,7 +1225,7 @@ PrefabInstance:
     - target: {fileID: 511141623980310980, guid: 53876b77a2c819348b11768227d03747,
         type: 3}
       propertyPath: TrailModule.widthOverTrail.scalar
-      value: 7
+      value: 8.5
       objectReference: {fileID: 0}
     - target: {fileID: 511141623980310980, guid: 53876b77a2c819348b11768227d03747,
         type: 3}

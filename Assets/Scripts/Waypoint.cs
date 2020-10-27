@@ -5,11 +5,20 @@ using UnityEngine;
 
 public class Waypoint : MonoBehaviour
 {
-    const int gridSize = 10;
-    public bool isExplored = false;
+    //Always arrange in order of "solididy" (in order of how likelihood that something might change, from most likely to least likely - in order of publicness)
+
+
     public Waypoint exploredFrom;
-    public Color exploredColor;
+    public bool isExplored = false;
+    public bool isPlaceable = true;
+
+    [SerializeField] Tower tower;
+    [SerializeField] Transform towerParent;
+
+    const int gridSize = 10;
     public bool isNeutral = false;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +41,21 @@ public class Waypoint : MonoBehaviour
 
     private void OnMouseOver()
     {
-        Debug.Log("Mouse is over block" + gameObject.name);
+        //conditions on left mouse click: isPlaceable = false iff (1) waypoint on path; (2) waypoint already occupied by tower
+        if (Input.GetMouseButtonDown(0)) //detect mouse LEFT click
+        {
+            if (isPlaceable)
+            {
+                Debug.Log("Place tower at " + gameObject.name);
+                GameObject towerInstance = Instantiate(tower.gameObject, transform.position, Quaternion.identity);
+                towerInstance.transform.parent = towerParent;
+                isPlaceable = false;
+            }
+            else
+            {
+                Debug.Log("Not placeable at this location");
+            }
+        }
     }
 
     public int GetGridSize()

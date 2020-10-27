@@ -44,7 +44,8 @@ public class Pathfinder : MonoBehaviour
 
     private void CreatePath()
     {
-        path.Add(endWaypoint); //Start at end waypoint and add it to the path list
+        //Start at end waypoint and add it to the path list (also set isPlaceable for this waypoint to false)
+        SetAsPath(endWaypoint);
 
         //initialize previous variable that contains the Waypoint from which the current Waypoint was explored (i.e. the Waypoint exploredFrom variable).  In this case, the current waypoint is the endWaypoint
         Waypoint previous = endWaypoint.exploredFrom;
@@ -52,18 +53,25 @@ public class Pathfinder : MonoBehaviour
         //Make a loop that continues as long as the previous waypoint is not equal to the start waypoint 
         while (previous != startWaypoint)
         {
-            //Add the previous waypoint to the path list within the while loop
-            path.Add(previous);
-
             //Reinitialize the previous waypoint to the exploredFrom variable of the latest previous waypoint (that has already been added to the list)
             previous = previous.exploredFrom;
+
+            //Add the previous waypoint to the path list within the while loop (also set isPlaceable for this waypoint to false)
+            SetAsPath(previous);
         }
 
-        //Outside the loop, add the startWaypoint to the end of the list
-        path.Add(startWaypoint);
+        //Outside the loop, add the startWaypoint to the end of the list (also set isPlaceable for this waypoint to false)
+        SetAsPath(startWaypoint);
 
         //Reverse the list so it is in the order that the Enemy will follow
         path.Reverse();
+    }
+
+    private void SetAsPath(Waypoint waypoint)
+    {
+        //Set isPlaceable = false for any waypoint on the path
+        waypoint.isPlaceable = false;
+        path.Add(waypoint); //add waypoint to the path
     }
 
     private void BreadthFirstSearch()

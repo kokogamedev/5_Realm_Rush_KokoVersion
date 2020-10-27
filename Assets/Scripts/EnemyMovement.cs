@@ -26,6 +26,10 @@ public class EnemyMovement : MonoBehaviour
         foreach (Waypoint waypoint in path)
         {
             //print("Visiting block: " + waypoint.name);
+            if (waypoint != path[0])
+            {
+                gameObject.transform.LookAt(waypoint.transform);
+            }
             transform.position = waypoint.transform.position;
             enemyTransform = waypoint.transform;
             yield return new WaitForSeconds(dwellTime);

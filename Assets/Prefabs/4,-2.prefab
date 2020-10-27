@@ -307,9 +307,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isExplored: 0
+  isPlaceable: 1
+  isNeutral: 0
+  isOccupied: 0
   exploredFrom: {fileID: 0}
   exploredColor: {r: 1, g: 1, b: 1, a: 0}
-  isNeutral: 0
+  tower: {fileID: 4757351475809957657, guid: 2615fcf674c93264a888449f92280a94, type: 3}
 --- !u!54 &5772649187435868889
 Rigidbody:
   m_ObjectHideFlags: 0
