@@ -8,13 +8,13 @@ public class EnemyMovement : MonoBehaviour
     Transform enemyTransform;
 
     [SerializeField] float dwellTime = 1.25f;
+    [SerializeField] List<Waypoint> path;
 
     // Start is called before the first frame update
     void Start()
     {
         Pathfinder pathfinder = FindObjectOfType<Pathfinder>();
-        
-        List<Waypoint> path = pathfinder.GetPath();
+        List<Waypoint>path = pathfinder.GetPath();
         StartCoroutine(FollowPath(path));
         //print("Hey I'm back at Start");
     }

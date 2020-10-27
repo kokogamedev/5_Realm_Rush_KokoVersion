@@ -53,11 +53,13 @@ public class Pathfinder : MonoBehaviour
         //Make a loop that continues as long as the previous waypoint is not equal to the start waypoint 
         while (previous != startWaypoint)
         {
+            //Add the previous waypoint to the path list within the while loop (also set isPlaceable for this waypoint to false)
+            //NOTE: this line must be before the following line, else you will double count the startWaypoint and miss the second-to-last waypoint
+            //the prior potential error is known as a OFF-BY-ONE ERROR
+            SetAsPath(previous);
+
             //Reinitialize the previous waypoint to the exploredFrom variable of the latest previous waypoint (that has already been added to the list)
             previous = previous.exploredFrom;
-
-            //Add the previous waypoint to the path list within the while loop (also set isPlaceable for this waypoint to false)
-            SetAsPath(previous);
         }
 
         //Outside the loop, add the startWaypoint to the end of the list (also set isPlaceable for this waypoint to false)
