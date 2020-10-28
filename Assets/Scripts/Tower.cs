@@ -19,6 +19,8 @@ public class Tower : MonoBehaviour
     bool isWeaponActive = false; //Initialize the boolean that indicates whether or not your weapon game object is active (whether your bullets should be firing)
     float firingRange = 50f; //Initialize a variable for tower's firing range - the furthest the target before tower cannot fire
 
+    public Waypoint baseWaypoint; //contains the waypoint on which the tower is currently placed
+
     // Start is called before the first frame update
     void Start()
     {
