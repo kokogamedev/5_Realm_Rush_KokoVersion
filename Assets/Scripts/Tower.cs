@@ -108,6 +108,8 @@ public class Tower : MonoBehaviour
 
     private void PlayFiringSFXWhenEmitting() // this method sets your bullet-firing particle system to be active (fire your bullets) at the target when it is present in the scene 
     {
+        //todo: fix bug - weapon sounds play before particle is emitted in-game
+
         if (weaponParticleEffect.isEmitting) //this lines tests whether a particle has been emitted from the particle system weaponParticleEffect of your weapon game object
         {
             PlayFiringSFX(); //plays a single clip of your firingSFX weapon-firing sound effect iff a clip is not already playing

@@ -18,12 +18,6 @@ public class Pathfinder : MonoBehaviour
     Waypoint searchCenter; //current search center
     List<Waypoint> path = new List<Waypoint>();
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     public List<Waypoint> GetPath()
     {
         
@@ -118,7 +112,7 @@ public class Pathfinder : MonoBehaviour
     {
         Waypoint neighbor = grid[neighborCoordinates];
 
-        if (neighbor.isExplored == false && queue.Contains(neighbor) == false && neighbor.isNeutral == false)
+        if (neighbor.isExplored == false && queue.Contains(neighbor) == false && neighbor.IsItNeutral() == false)
         {
             queue.Enqueue(neighbor);
             //print("Queueing" + neighbor);
@@ -144,11 +138,5 @@ public class Pathfinder : MonoBehaviour
             }
             //print("Loaded " + grid.Count + " blocks");
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

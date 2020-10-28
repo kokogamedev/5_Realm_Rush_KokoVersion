@@ -25,10 +25,4 @@ public class SpawnEnemies : MonoBehaviour
             yield return new WaitForSeconds(secondsBetweenSpawns);
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -23,12 +23,6 @@ public class EnemyDamage : MonoBehaviour
         scoreBoard = FindObjectOfType<ScoreBoard>(); //At start, find an object in our scene of type Scoreboard (find the Scoreboard script and its associated scoreboard game object)
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void OnParticleCollision(GameObject other) //This method processes collisions of a particle system's particles on your game object - this method will handle bullet impacts on your game object
     {
         ProcessHit();
@@ -68,6 +62,14 @@ public class EnemyDamage : MonoBehaviour
         //{
         //    deathFX.Play();
         //}
+
+        // DESTROYING VFX THROUGH CODE INSTEAD OF UNITY EDITOR ---->
+        // IF your particle effect was not self-destroying, you can destroy it here in code, BUT there is an issue -> if you destroy the game object, you destroy the vfx and the whole script along with it
+        // SO you must wait for the vfx to play before you can destroy your game object 
+        // HOW you do it is the with the following code:
+        // float destroyDelay = deathFX.main.duration; //duration of the particle effect
+        // Destroy(fx, destroyDelay);
+        // Destroy(gameObject);
 
         Destroy(gameObject);
     }

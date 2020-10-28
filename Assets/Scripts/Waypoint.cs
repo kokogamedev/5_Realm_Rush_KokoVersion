@@ -13,26 +13,16 @@ public class Waypoint : MonoBehaviour
     public bool isPlaceable = true;
 
     const int gridSize = 10;
-    public bool isNeutral = false;
 
-
-    // Start is called before the first frame update
-    void Start()
+    public bool IsItNeutral()
     {
-        IsItNeutral();
-    }
-
-    private void IsItNeutral()
-    {
+        bool isNeutral = false;
         if (gameObject.CompareTag("Neutral")) //new code used here --> more efficient than just comparing using ==
         {
             isNeutral = true;
         }
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
+        return isNeutral;
     }
 
     private void OnMouseOver()
