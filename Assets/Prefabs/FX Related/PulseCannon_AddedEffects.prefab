@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 511141623980310980}
   - component: {fileID: 511141623980310983}
   m_Layer: 0
-  m_Name: Pulse Cannon 1
+  m_Name: PulseCannon_AddedEffects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

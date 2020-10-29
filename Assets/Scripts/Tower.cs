@@ -21,12 +21,15 @@ public class Tower : MonoBehaviour
 
     public Waypoint baseWaypoint; //contains the waypoint on which the tower is currently placed
 
+    SpawnEnemies enemySpawner;
+
     // Start is called before the first frame update
     void Start()
     {
         // todo: this might need some refinemnent when multiple enemies show up... could cause a problme of finding multiple objects of this type
         weaponParticleEffect = weapon.GetComponent<ParticleSystem>(); //At start, extract weapon game object's particle system component and set it to equal our initialized weaponParticleEffect variable
         weaponAudioSource = weapon.GetComponent<AudioSource>(); //At start, extract weapon game object's audiosource component and set it to equal our initialized weaponAudioSource variable
+        enemySpawner = FindObjectOfType<SpawnEnemies>();
     }
 
     // Update is called once per frame
@@ -38,7 +41,7 @@ public class Tower : MonoBehaviour
 
     private void SetTargetEnemy()
     {
-        var sceneEnemies = FindObjectsOfType<EnemyDamage>(); // Get the collection of enemies
+        EnemyDamage[] sceneEnemies = enemySpawner.GetEnemies(); // Get the collection of enemies
         if (sceneEnemies.Length < 1) { return; } // check if there are any items in the enemy collection (are there any enemies spawned?)
 
         Transform closestEnemy = sceneEnemies[0].transform;// Assume the first is the “winner”

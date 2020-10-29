@@ -10,17 +10,27 @@ public class EnemyDamage : MonoBehaviour
     [SerializeField] AudioClip deathSound; //initializing the audioclip for death/explosion sounds for enemy
     //[SerializeField] ParticleSystem deathFX; //initializing the particle system for enemy death (explosion) --- part of an attempted way to instantiate and play this particle system (see associated todo in KillEnemy()
     [SerializeField] GameObject deathFX;
+    GameObject fxParent;
 
     //todo: create a dynamic change of hits and scoreperhit as game goes on, also potentially find a way to adjust enemy appearance as its hitpoints increase
     [SerializeField] int hits = 5; //initializing number of hits required for enemy death
     int scorePerHit = 10; //initializing the points/score you receive for every weapon impact on enemy
     ScoreBoard scoreBoard; //initializing the Scoreboard script located on the scoreboard - allows us to update/extract from said script
 
+    SpawnEnemies enemySpawner;
+
+    public GameObject baseHitfx;
+    [SerializeField] float enemyAssaultHitValue = 5f;
+
     // Start is called before the first frame update
     void Start()
     {
         audioSource = GetComponent<AudioSource>(); //At start, extract audiosource component and set it to equal our initialized audioSource variable
         scoreBoard = FindObjectOfType<ScoreBoard>(); //At start, find an object in our scene of type Scoreboard (find the Scoreboard script and its associated scoreboard game object)
+        enemySpawner = FindObjectOfType<SpawnEnemies>();
+        fxParent = GameObject.Find("TempFX");
+
+        //todo: game not finding TempFX game object
     }
 
     void OnParticleCollision(GameObject other) //This method processes collisions of a particle system's particles on your game object - this method will handle bullet impacts on your game object
@@ -36,6 +46,11 @@ public class EnemyDamage : MonoBehaviour
         }
     }
 
+    public GameObject GetfxParent()
+    {
+        return fxParent;
+    }
+
     private void ProcessHit() //this method subtracts  from your gameObject's health/hitpoints, and updates the score on the scoreboard
     {
         hits--; 
@@ -47,9 +62,7 @@ public class EnemyDamage : MonoBehaviour
 
     private void KillEnemy() //instantiates a self-destroying explosion particle system at location of game object (and no rotation), and destroys your game object
     {
-
-        GameObject fx = Instantiate(deathFX, transform.position, Quaternion.identity);
-        //fx.transform.parent = parent;
+        PlayDeathFX();
 
         // Important to destroy particle effect after instantiation -- set Stop Action to Destroy in Particle system settings in Unity inspector!
 
@@ -72,10 +85,23 @@ public class EnemyDamage : MonoBehaviour
         // Destroy(gameObject);
 
         Destroy(gameObject);
+        enemySpawner.UpdateEnemyCountText();
+
+    }
+
+    private void PlayDeathFX()
+    {
+        GameObject fx = Instantiate(deathFX, transform.Find("Enemy_A").position, Quaternion.identity);
+        fx.transform.parent = fxParent.transform.parent;
     }
 
     private void PlayHitNoise() //plays one shot of your impactSound SFX - no consideration for overlapping sounds in this case
     {
         audioSource.PlayOneShot(impactSound);//Play the audio you attach to the AudioSource component
+    }
+
+    public float GetEnemyAssaultHitValue()
+    {
+        return enemyAssaultHitValue;
     }
 }
