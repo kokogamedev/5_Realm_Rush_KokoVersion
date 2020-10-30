@@ -39,8 +39,9 @@ public class SpawnEnemies : MonoBehaviour
         {
             audioSource.PlayOneShot(spawnSound);
             EnemyMovement newEnemy = Instantiate(enemyInstance, transform.position, Quaternion.identity);
-            ConfigureEnemyHitSettings(newEnemy);
             newEnemy.transform.parent = gameObject.transform;
+            ConfigureEnemyHitSettings(newEnemy);
+            LevelUpTowers();
             UpdateEnemyCountText();
             numEnemiesSpawned++;
             yield return new WaitForSeconds(secondsBetweenSpawns);
