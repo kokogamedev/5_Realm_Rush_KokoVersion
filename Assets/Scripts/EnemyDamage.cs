@@ -17,7 +17,7 @@ public class EnemyDamage : MonoBehaviour
     public int currentHits; //initializing number of hits required for enemy death
     public int maxHits;
     [SerializeField] float scoreHitpointsFactor = 500f;
-    int scorePerHit = 10; //initializing the points/score you receive for every weapon impact on enemy
+    int scorePerHit; //initializing the points/score you receive for every weapon impact on enemy
     ScoreBoard scoreBoard; //initializing the Scoreboard script located on the scoreboard - allows us to update/extract from said script
 
     SpawnEnemies enemySpawner;
@@ -32,6 +32,7 @@ public class EnemyDamage : MonoBehaviour
         scoreBoard = FindObjectOfType<ScoreBoard>(); //At start, find an object in our scene of type Scoreboard (find the Scoreboard script and its associated scoreboard game object)
         enemySpawner = FindObjectOfType<SpawnEnemies>();
         fxParent = GameObject.Find("TempFX");
+        scorePerHit = enemySpawner.scorePerHit;
 
         //todo: game not finding TempFX game object
     }
@@ -39,6 +40,7 @@ public class EnemyDamage : MonoBehaviour
     void OnParticleCollision(GameObject other) //This method processes collisions of a particle system's particles on your game object - this method will handle bullet impacts on your game object
     {
         ProcessHit();
+        enemySpawner.LevelUpTowers();
         if (currentHits < 1) //destroys enemy and initiates explosion particle and sound FX if hitpoints is below 1
         {
             KillEnemy();

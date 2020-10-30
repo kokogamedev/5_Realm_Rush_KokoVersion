@@ -143,8 +143,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b30584e3e42918e48bb43c050482fbeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dwellTimeFactor: 0.45
-  minDwellTime: 0.2
+  dwellTimeFactor: 0.525
+  minDwellTime: 0.225
   hitFactor: 10.1
 --- !u!114 &3353017384208296312
 MonoBehaviour:

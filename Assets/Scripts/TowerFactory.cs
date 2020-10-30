@@ -8,7 +8,7 @@ public class TowerFactory : MonoBehaviour
 
     [SerializeField] Tower towerPrefab; //Tower Prefab
     [SerializeField] Transform towerParent;
-    [SerializeField] int towerLimit = 5;
+    [SerializeField] int towerLimit = 4;
 
     //Create empty queue of towers
     Queue<Tower> towerQueue = new Queue<Tower>();
@@ -82,7 +82,12 @@ public class TowerFactory : MonoBehaviour
     {
         foreach(Tower towerInstance in towerQueue)
         {
-            towerInstance.SetFiringRate(towerInstance.GetFiringRate() + 1);//particleFireSpeed++
+            towerInstance.SetFiringRate(towerInstance.GetFiringRate() + 0.75f);//particleFireSpeed++
         }
+    }
+
+    public void UpgradeTowerLimit()
+    {
+        towerLimit++;
     }
 }

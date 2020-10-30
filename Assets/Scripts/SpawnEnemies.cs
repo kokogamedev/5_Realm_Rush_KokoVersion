@@ -13,12 +13,18 @@ public class SpawnEnemies : MonoBehaviour
     public List<EnemyMovement> enemies = new List<EnemyMovement>();
     int currentEnemyCount; //number of enemies currently in the scene at any given time
     public int numEnemiesSpawned = 0; //todo: potentially for later use - lets you know how many enemies have been spawned in this wave
-    [SerializeField] Text enemyCountText;
+    [SerializeField] Text enemyHitPointsText;
 
     [SerializeField] int baseHitPoints = 5;
-    public int oldBaseHitPoints;
+    public int scorePerHit = 10;
+    public int oldBaseScore;
     public int recentMaxHits;
     [SerializeField] float scoreHitpointsFactor = 500f;
+    [SerializeField] int fireRateUpgradeFactor = 2;
+    [SerializeField] int towerLimitUpgradeFactor = 4;
+
+    int playerLevel = 1;
+    [SerializeField] Text playerLevelText;
 
     [SerializeField] AudioClip spawnSound;
     AudioSource audioSource;
@@ -29,8 +35,9 @@ public class SpawnEnemies : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         scoreBoard = FindObjectOfType<ScoreBoard>();
+        
         StartCoroutine(Spawn());
-        oldBaseHitPoints = baseHitPoints;
+        oldBaseScore = scorePerHit * baseHitPoints;
     }
 
     private IEnumerator Spawn()
@@ -41,7 +48,8 @@ public class SpawnEnemies : MonoBehaviour
             EnemyMovement newEnemy = Instantiate(enemyInstance, transform.position, Quaternion.identity);
             newEnemy.transform.parent = gameObject.transform;
             ConfigureEnemyHitSettings(newEnemy);
-            LevelUpTowers();
+            UpdateEnemyHitPointsText();
+            LevelUpPlayer();
             UpdateEnemyCountText();
             numEnemiesSpawned++;
             yield return new WaitForSeconds(secondsBetweenSpawns);
@@ -63,8 +71,11 @@ public class SpawnEnemies : MonoBehaviour
     public void UpdateEnemyCountText()
     {
         currentEnemyCount = GetEnemies().Length;
-        enemyCountText.text = currentEnemyCount.ToString();
-        print(currentEnemyCount + " enemies present");
+    }
+
+    public void UpdateEnemyHitPointsText()
+    {
+        enemyHitPointsText.text = recentMaxHits.ToString();
     }
 
     public EnemyDamage[] GetEnemies()
@@ -72,12 +83,25 @@ public class SpawnEnemies : MonoBehaviour
         return FindObjectsOfType<EnemyDamage>();
     }
 
-    private void LevelUpTowers()
+    public void LevelUpTowers()
     {
-        if (recentMaxHits - oldBaseHitPoints == oldBaseHitPoints)
+        if (scoreBoard.score == fireRateUpgradeFactor * oldBaseScore)
         {
             FindObjectOfType<TowerFactory>().UpgradeTowerFiringRate();
-            oldBaseHitPoints = recentMaxHits;
+            oldBaseScore = scoreBoard.score;
+        }
+        if (scoreBoard.score == towerLimitUpgradeFactor*oldBaseScore)
+        {
+            FindObjectOfType<TowerFactory>().UpgradeTowerLimit();
+        }
+    }
+
+    private void LevelUpPlayer()
+    {
+        if ( (recentMaxHits - baseHitPoints)/2 % 1 == 0) // check if your recentMaxHits is divisible by baseHitPoints with no remainder
+        {
+            playerLevel = ((recentMaxHits - baseHitPoints)/2) + 1;
+            playerLevelText.text = playerLevel.ToString();
         }
     }
 }
