@@ -7,8 +7,9 @@ public class EnemyMovement : MonoBehaviour
 
     Transform enemyTransform;
 
-    [SerializeField] float dwellTime = 1.25f;
-    [SerializeField] List<Waypoint> path;
+    [SerializeField] float dwellTimeFactor = 1.25f;
+    [SerializeField] float minDwellTime = 0.5f;
+    [SerializeField] [Range(5f,50f)] float hitFactor = 5f;
     SpawnEnemies enemySpawner;
 
     // Start is called before the first frame update
@@ -34,7 +35,7 @@ public class EnemyMovement : MonoBehaviour
             }
             transform.position = waypoint.transform.position;
             enemyTransform = waypoint.transform;
-            yield return new WaitForSeconds(dwellTime);
+            yield return new WaitForSeconds(DwellIncreaseWithHit());
         }
 
         //Base Hit Explosion happens here
@@ -57,5 +58,12 @@ public class EnemyMovement : MonoBehaviour
     public Transform GetEnemyTransform()
     {
         return enemyTransform;
+    }
+
+    public float DwellIncreaseWithHit()
+    {
+        EnemyDamage enemyDamage = GetComponent<EnemyDamage>();
+        float currentDwellTime = (enemyDamage.currentHits/enemyDamage.maxHits)*dwellTimeFactor + minDwellTime;
+        return currentDwellTime;
     }
 }

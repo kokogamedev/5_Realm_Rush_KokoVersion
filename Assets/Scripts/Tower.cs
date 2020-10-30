@@ -39,6 +39,17 @@ public class Tower : MonoBehaviour
         PanAndFireIfInRange();
     }
 
+    public void SetFiringRate(float newFiringRate)
+    {
+        var emission = weaponParticleEffect.emission;
+        emission.rateOverTime = newFiringRate;
+    }
+
+    public float GetFiringRate()
+    {
+        return weaponParticleEffect.emission.rateOverTime.constant;
+    }
+    
     private void SetTargetEnemy()
     {
         EnemyDamage[] sceneEnemies = enemySpawner.GetEnemies(); // Get the collection of enemies

@@ -15,22 +15,48 @@ public class SpawnEnemies : MonoBehaviour
     public int numEnemiesSpawned = 0; //todo: potentially for later use - lets you know how many enemies have been spawned in this wave
     [SerializeField] Text enemyCountText;
 
+    [SerializeField] int baseHitPoints = 5;
+    public int oldBaseHitPoints;
+    public int recentMaxHits;
+    [SerializeField] float scoreHitpointsFactor = 500f;
+
+    [SerializeField] AudioClip spawnSound;
+    AudioSource audioSource;
+    ScoreBoard scoreBoard;
+
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+        scoreBoard = FindObjectOfType<ScoreBoard>();
         StartCoroutine(Spawn());
+        oldBaseHitPoints = baseHitPoints;
     }
 
     private IEnumerator Spawn()
     {
         while(enemies.Count <= enemyNumberLimit)
         {
+            audioSource.PlayOneShot(spawnSound);
             EnemyMovement newEnemy = Instantiate(enemyInstance, transform.position, Quaternion.identity);
+            ConfigureEnemyHitSettings(newEnemy);
             newEnemy.transform.parent = gameObject.transform;
             UpdateEnemyCountText();
             numEnemiesSpawned++;
             yield return new WaitForSeconds(secondsBetweenSpawns);
         }
+    }
+
+    private void ConfigureEnemyHitSettings(EnemyMovement newEnemy)
+    {
+        newEnemy.GetComponent<EnemyDamage>().currentHits = SetEnemyHitPoints();
+        newEnemy.GetComponent<EnemyDamage>().maxHits = SetEnemyHitPoints();
+        recentMaxHits = SetEnemyHitPoints();
+    }
+
+    private int SetEnemyHitPoints()
+    {
+        return Mathf.RoundToInt(baseHitPoints + scoreBoard.score / scoreHitpointsFactor);
     }
 
     public void UpdateEnemyCountText()
@@ -43,5 +69,14 @@ public class SpawnEnemies : MonoBehaviour
     public EnemyDamage[] GetEnemies()
     {
         return FindObjectsOfType<EnemyDamage>();
+    }
+
+    private void LevelUpTowers()
+    {
+        if (recentMaxHits - oldBaseHitPoints == oldBaseHitPoints)
+        {
+            FindObjectOfType<TowerFactory>().UpgradeTowerFiringRate();
+            oldBaseHitPoints = recentMaxHits;
+        }
     }
 }

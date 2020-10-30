@@ -7,7 +7,7 @@ public class TowerFactory : MonoBehaviour
     //This class will contain a circular/ring buffer for placing towers and limiting the number of towers present at any given time
 
     [SerializeField] Tower towerPrefab; //Tower Prefab
-    [SerializeField] Transform towerParent; 
+    [SerializeField] Transform towerParent;
     [SerializeField] int towerLimit = 5;
 
     //Create empty queue of towers
@@ -15,7 +15,9 @@ public class TowerFactory : MonoBehaviour
 
     int towerCount = 0;
 
-    
+    SpawnEnemies enemySpawner;
+
+
     public void AddTower(Waypoint baseWaypoint)
     {
         //update tower count
@@ -69,10 +71,18 @@ public class TowerFactory : MonoBehaviour
         oldestTower.baseWaypoint = newBaseWaypoint;
 
         oldestTower.transform.position = newBaseWaypoint.transform.position; //move oldest tower to new baseWaypoint position
-        
+
         towerQueue.Enqueue(oldestTower); //enqueue this oldest tower (to top of queue)
 
         Debug.Log("Tower limit reached");
         //todo: actually move towers!
+    }
+
+    public void UpgradeTowerFiringRate()
+    {
+        foreach(Tower towerInstance in towerQueue)
+        {
+            towerInstance.SetFiringRate(towerInstance.GetFiringRate() + 1);//particleFireSpeed++
+        }
     }
 }

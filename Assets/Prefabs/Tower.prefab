@@ -278,7 +278,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 9117c4f0aac9c3e47a7252b50cf45924, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1394,6 +1394,11 @@ PrefabInstance:
         type: 3}
       propertyPath: LightsModule.rangeCurve.scalar
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 511141623980310980, guid: 53876b77a2c819348b11768227d03747,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 511141623980310982, guid: 53876b77a2c819348b11768227d03747,
         type: 3}

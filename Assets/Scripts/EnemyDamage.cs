@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,7 +14,9 @@ public class EnemyDamage : MonoBehaviour
     GameObject fxParent;
 
     //todo: create a dynamic change of hits and scoreperhit as game goes on, also potentially find a way to adjust enemy appearance as its hitpoints increase
-    [SerializeField] int hits = 5; //initializing number of hits required for enemy death
+    public int currentHits; //initializing number of hits required for enemy death
+    public int maxHits;
+    [SerializeField] float scoreHitpointsFactor = 500f;
     int scorePerHit = 10; //initializing the points/score you receive for every weapon impact on enemy
     ScoreBoard scoreBoard; //initializing the Scoreboard script located on the scoreboard - allows us to update/extract from said script
 
@@ -36,7 +39,7 @@ public class EnemyDamage : MonoBehaviour
     void OnParticleCollision(GameObject other) //This method processes collisions of a particle system's particles on your game object - this method will handle bullet impacts on your game object
     {
         ProcessHit();
-        if (hits < 1) //destroys enemy and initiates explosion particle and sound FX if hitpoints is below 1
+        if (currentHits < 1) //destroys enemy and initiates explosion particle and sound FX if hitpoints is below 1
         {
             KillEnemy();
         }
@@ -53,7 +56,7 @@ public class EnemyDamage : MonoBehaviour
 
     private void ProcessHit() //this method subtracts  from your gameObject's health/hitpoints, and updates the score on the scoreboard
     {
-        hits--; 
+        currentHits--; 
         scoreBoard.ScoreHit(scorePerHit);
 
         //todo: consider hit effects --- I used subemitters, but Rick used a nested ParticleSystem called hitParticlePrefab, which he added through [SerializeField] member variable, and then utilized the following line
@@ -83,6 +86,19 @@ public class EnemyDamage : MonoBehaviour
         // float destroyDelay = deathFX.main.duration; //duration of the particle effect
         // Destroy(fx, destroyDelay);
         // Destroy(gameObject);
+
+        // PLAYING AN AUDIOCLIP AT A POINT WITHOUT NEEDING TO WORRY ABOUT IF ITS ASSOCIATED GAME OBJECT IS AROUND TO BE THE AUDIOSOURCE
+        // unexpected issue: deathSound too quiet to be heard. 
+        // method to debug and fix this:
+        // Step 1: Use Debug.Break() to compare enemy death SFX to enemy hit SFX
+        // Step 2: Where in our scene are 2D sounds heard --> answer is the camera! 
+        // Step 3: solution is to put the audio source right next to the audio listener, our camera
+            //FAILED ATTEMPT: AudioSource.PlayClipAtPoint(deathSound, transform.position);
+                // Debug.Break() // allow us to see properties of audio source in the inspector of our temporary PlayOneShot audio
+                                 // notice that the spatial blend is 3D and set at 1
+                                        // spatial blend -> how much the 3D engine has on audio source
+                                            // distance from audiosource to camera in combo with 3D spatial blend setting is causing audio to be dropped off before it reaches the camera
+            // SUCCESSFUL ATTEMPT: AudioSource.PlayClipAtPoint(deathSound, Camera.main.transform.position);
 
         Destroy(gameObject);
         enemySpawner.UpdateEnemyCountText();
